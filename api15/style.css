@@ -1,57 +1,56 @@
 :root {
-    --text-shadow-color: rgba(255, 255, 255, 0.5);
-    --link-background: #DAD2CA;
-    --text-color: #444;
-    --circle-background: #8FD4C1;
-    --border-color: #ffffff;
+  --text-shadow-color: rgba(255, 255, 255, 0.5);
+  --link-background: #dad2ca;
+  --text-color: #444;
+  --circle-background: #8fd4c1;
+  --border-color: #ffffff;
 }
 
 body {
-    padding: 20px;
+  padding: 20px;
+  background: linear-gradient(90deg, #29323c 0%, #485563 100%);
 }
 
-#data-container {
-    counter-reset: li; 
-    list-style: none; 
-    font: 14px "Trebuchet MS", "Lucida Sans";
-    padding: 0;
-    text-shadow: 0 1px 0 var(--text-shadow-color);
+.title {
+  font-size: 40px;
+  margin: 10px;
+  background-color: deeppink;
 }
 
-#data-container a {
-    position: relative;
-    display: block;
-    padding: .4em .4em .4em 2em;
-    margin: .5em 0;
-    background: var(--link-background);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: .3em;
-    transition: .3s ease-out;
+.title2 {
+  font-size: 30px;
+  background-color: deeppink;
 }
 
-#data-container a:hover {
-    background: var(--link-background);
+.post {
 }
 
-#data-container a:hover:before {
-    transform: rotate(360deg);
+.post__title {
+  background-color: aquamarine;
 }
 
-#data-container a:before {
-    content: counter(li);
-    counter-increment: li;
-    position: absolute;
-    left: -1.3em;
-    top: 50%;
-    margin-top: -1.3em;
-    background: var(--circle-background);
-    height: 2em;
-    width: 2em;
-    line-height: 2em;
-    border: .3em solid var(--border-color);
-    text-align: center;
-    font-weight: bold;
-    border-radius: 2em;
-    transition: all .3s ease-out;
+.post__text {
+  background-color: salmon;
+}
+
+.post__comments-text {
+  font-size: 20px;
+}
+
+.post__comments {
+  margin-top: 40px;
+}
+
+.post-comment {
+  margin-top: 20px;
+  background-color: darkorange;
+}
+
+.post-comment__author {
+  font-size: 18px;
+  margin: 15px 15px 15px 0px;
+  background-color: yellowgreen;
+}
+
+.post-comment__text {
 }

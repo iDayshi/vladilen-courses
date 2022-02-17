@@ -1,5 +1,5 @@
-const URL_USERT = 'https://jsonplaceholder.typicode.com/users';
-toggleLoader();
+const GET_URL = 'https://jsonplaceholder.typicode.com/posts';
+const GET_URL_COMMENT = 'https://jsonplaceholder.typicode.com/comments';
 
 function toggleLoader() {
   const loaderElem = document.querySelector('#loader');
@@ -11,78 +11,77 @@ function toggleLoader() {
   }
 }
 
-function addName(objUser) {
-  const dataContainer = document.querySelector('#data-container');
-  objUser.forEach((element) => {
-    const liElement = document.createElement('li');
-    const urlName = document.createElement('a');
-    urlName.innerText = element.name;
-    liElement.append(urlName);
-    dataContainer.append(liElement);
+{
+  /* <div id="post" class="post">
+    <h1 class="post__title">Название Поста</h1>
+    <p class="post__text">Текст Поста</p>
+    <b class="post__comments-text">Комментарии</b>
+    <div class="post__comments">
+        <div class="post-comment">
+            <span class="post-comment__author">
+                maxim@gmail.com
+            </span>
+            <span class="post-comment__text">
+                laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo
+                necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium
+            </span>
+        </div>
+    </div>
+ </div> */
+}
+
+function addComment(user, comment) {
+  const scriptElem = document.querySelector('script');
+  const bodyElem = document.querySelector('body');
+  const divElement = document.createElement('div');
+  const divId = divElement;
+  divId.className = 'post';
+  divId.id = 'post';
+  const divElemComments = document.createElement('div');
+  divElemComments.className = 'post__comments';
+  const tittlePost = document.createElement('h1');
+  tittlePost.className = 'post__title';
+  tittlePost.innerText = user.title;
+  const bodyPost = document.createElement('p');
+  bodyPost.className = 'post__text';
+  bodyPost.innerText = user.body;
+  const commentPost = document.createElement('b');
+  commentPost.className = 'post__comments-text';
+  commentPost.innerText = 'Коментарии';
+  bodyElem.insertBefore(divId, scriptElem);
+  divId.append(tittlePost);
+  divId.append(bodyPost);
+  divId.append(commentPost);
+  divId.append(divElemComments);
+  comment.forEach((element) => {
+    const divComment = document.createElement('div');
+    divComment.className = 'post-comment';
+    const spanAuthor = document.createElement('span');
+    spanAuthor.className = 'post-comment__author';
+    spanAuthor.innerText = element.email;
+    const spanComment = document.createElement('span');
+    spanComment.className = 'post-comment__text';
+    spanComment.innerText = element.body;
+    divElemComments.append(divComment);
+    divComment.append(spanAuthor);
+    divComment.append(spanComment);
   });
 }
 
-const addAllNames = () => {
-  const result = fetch(URL_USERT, {
-    method: 'GET',
-  });
-
-  result
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Ошибка запроса');
-      }
-      return response.json();
-    })
-    .then((quotesAll) => {
-      addName(quotesAll);
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-    .finally(() => {
-      toggleLoader();
-    });
+const renderPost = async (id) => {
+  try {
+    const response = await fetch(`${GET_URL}/${id}`);
+    const dataUser = await response.json();
+    console.log(dataUser);
+    const responseComment = await fetch(`${GET_URL_COMMENT}?postId=${id}`);
+    const dataComment = await responseComment.json();
+    console.log(dataComment);
+    addComment(dataUser, dataComment);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    toggleLoader();
+  }
 };
 
-addAllNames();
-
-// const belquotes = document.getElementById("belquotes");
-// const englishquotes = document.getElementById("englishquotes");
-// const resetColor = document.querySelectorAll(`.nav_link`)
-// const introImg = document.querySelector('.intro');
-// const quotes = document.querySelector(`.quotesText`);
-// const quotesBtn = document.querySelector(`.button-btn`);
-// const quotesAuthor = document.querySelector('.authorText')
-// const quoteslogo = document.querySelector('.logo')
-// const audioBtn = document.querySelector('.play')
-
-// belquotes.addEventListener('click', () => {
-//   quotesBtn.setAttribute(`onclick`,"randomQuotes('belarusian_quotes.json')")
-//   randomQuotes('belarusian_quotes.json')
-//   quotesBtn.innerHTML = 'Адвольная цытата'
-//   quotes.style.fontFamily = 'Belarus';
-//   quoteslogo.innerHTML ='Цытаты пісьменнікаў'
-//   introImg.style.background = 'url(assets/belfoto/logo.jpg) center / 100% no-repeat'
-//   reset(`belquotes`)
-// });
-
-// englishquotes.addEventListener('click', () => {
-//   quotesBtn.setAttribute(`onclick`,"randomQuotes('https://type.fit/api/quotes')")
-//   randomQuotes('https://type.fit/api/quotes')
-//   quotesBtn.innerHTML = 'Random quotes'
-//   quotes.style.fontFamily = 'Eng';
-//   quoteslogo.innerHTML ='Quotes Random'
-//   introImg.style.background = 'url(assets/belfoto/logo2.jpg) center / 100% no-repeat'
-//   reset(`englishquotes`)
-// });
-
-// function reset(value){
-//   resetColor.forEach((nav) => {
-//     if(nav === document.getElementById(value)){
-//       nav.style.color = `#bdae82`
-//     } else {
-//       nav.style.color = `white`
-//     }
-//   })
-// }
+renderPost(1);
