@@ -1,0 +1,56 @@
+:root {
+  --text-shadow-color: rgba(255, 255, 255, 0.5);
+  --link-background: #dad2ca;
+  --text-color: #444;
+  --circle-background: #8fd4c1;
+  --border-color: #ffffff;
+}
+
+body {
+  padding: 20px;
+  background: linear-gradient(90deg, #29323c 0%, #485563 100%);
+}
+
+.title {
+  font-size: 40px;
+  margin: 10px;
+  background-color: deeppink;
+}
+
+.title2 {
+  font-size: 30px;
+  background-color: deeppink;
+}
+
+.post {
+}
+
+.post__title {
+  background-color: aquamarine;
+}
+
+.post__text {
+  background-color: salmon;
+}
+
+.post__comments-text {
+  font-size: 20px;
+}
+
+.post__comments {
+  margin-top: 40px;
+}
+
+.post-comment {
+  margin-top: 20px;
+  background-color: darkorange;
+}
+
+.post-comment__author {
+  font-size: 18px;
+  margin: 15px 15px 15px 0px;
+  background-color: yellowgreen;
+}
+
+.post-comment__text {
+}
